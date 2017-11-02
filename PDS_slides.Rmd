@@ -1,0 +1,64 @@
+---
+title: "Machine Learning with caret and recipes"
+subtite: "Practical Data Science Meetup"
+author: "Michael Levy  |  @ucdlevy"
+date: "2017-11-02"
+output:
+  rmdshower::shower_presentation:
+  self_contained: false
+# katex: true
+ratio: 16x10
+---
+
+```{r setup, include = FALSE}
+library(tidyverse)
+library(knitr)
+library(caret)
+library(recipes)
+opts_chunk$set(echo = FALSE, warning = FALSE, cache = TRUE, 
+               fig.asp = 1, fig.width = 4)
+# Data source: https://archive.ics.uci.edu/ml/machine-learning-databases/pima-indians-diabetes/pima-indians-diabetes.data
+d <- read_csv("https://archive.ics.uci.edu/ml/machine-learning-databases/pima-indians-diabetes/pima-indians-diabetes.data",
+              col_names = c("num_pregnancies", "glucose_challenge", "BP", "skin_fold",
+                            "insulin", "BMI", "diabetes_pedigree", "age", "diabetes"))
+write_csv(d, "pima.csv")
+# Replace impossible zeros with NA:
+for (column in c("BP", "skin_fold", "insulin", "BMI", "age"))
+  d[[column]][d[[column]] == 0] <- NA
+```
+
+
+
+
+## Machine Learning with `caret` & `recipes`
+
+<img src="https://media.istockphoto.com/photos/carrot-isolated-picture-id166106089?k=6&m=166106089&s=612x612&w=0&h=QyF1Ktkjyez28_Wo5O6skqFta5XDEnyxPoUpfYRgj8A=" class="cover">
+
+<p class="black">
+Michael Levy  |  @ucdlevy  
+SLC Practical Data Science Meetup  
+2017-11-02
+</p>
+
+## What is `caret`?
+
+> The caret package (short for _C_lassification _A_nd _RE_gression _T_raining) is a set of functions that attempt to streamline the process for creating predictive models.
+
+Extensive documentation: topepo.github.io/caret
+
+## What is `recipes`?
+
+> The recipes package is an alternative method for creating and preprocessing design matrices that can be used for modeling or visualization.
+
+- Grew out of `caret`'s preprocessing functionality. 
+  - Comprehensive
+  - Sequential
+  - Efficient
+  - `tidyverse`-style API
+
+## A dataset
+
+```{r summary, include = FALSE}
+summary(d)
+```
+
