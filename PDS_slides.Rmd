@@ -57,6 +57,8 @@ SLC Practical Data Science Meetup
 
 > The caret package (short for **C**lassification **A**nd **RE**gression **T**raining) is a set of functions that attempt to streamline the process for creating predictive models.
 
+In turn, caret relies on a great number of other packages that implement predictive models. Here, we're using `xgboost` and `nnet` for gradient boosted machines and neural networks, respectively.
+
 </p><p class="double-flow">
 
 ```{r, out.height = 300, echo = FALSE}
